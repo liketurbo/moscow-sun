@@ -7,7 +7,7 @@
     "dev": "nodemon --exec webpack-dev-server --mode development --watch webpack.config.js"
   },
   "dependencies": {
-    "preact": "^8.4.2"
+    "preact": "10.0.0-beta.1"
   },
   "devDependencies": {
     "html-webpack-plugin": "^3.2.0",
