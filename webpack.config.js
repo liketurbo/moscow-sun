@@ -10,7 +10,7 @@ const config = {
     path: path.join(__dirname, 'dist')
   },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }]
+    rules: [{ test: /\.tsx?$/, use: 'ts-loader' }]
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
