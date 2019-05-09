@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# IDLE config
+.vscode/
+
+# Logs
+yarn-error.log
