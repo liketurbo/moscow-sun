@@ -7,6 +7,7 @@
     "dev": "nodemon --exec webpack-dev-server --mode development --watch webpack.config.js"
   },
   "dependencies": {
+    "moment": "^2.24.0",
     "preact": "10.0.0-beta.1"
   },
   "devDependencies": {
