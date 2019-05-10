@@ -3,14 +3,20 @@
   "version": "1.0.0",
   "author": "Ramzan Chasygov <theliketurbo@gmail.com>",
   "license": "MIT",
+  "homepage": "https://liketurbo.github.io/moscow-sun",
   "scripts": {
-    "dev": "nodemon --exec webpack-dev-server --mode development --watch webpack.config.js"
+    "dev": "nodemon --exec webpack-dev-server --mode development --watch webpack.config.js",
+    "build": "webpack --mode production",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d ./dist"
   },
   "dependencies": {
     "moment": "^2.24.0",
     "preact": "10.0.0-beta.1"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^2.0.2",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "nodemon": "^1.19.0",
     "ts-loader": "^6.0.0",
