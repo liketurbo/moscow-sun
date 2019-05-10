@@ -1,3 +1,5 @@
+import './assets/styles/index.css';
+
 import moment, { Moment } from 'moment';
 import { h, render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
