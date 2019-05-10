@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
 
 const DEV_ENV = 'DEV_ENV';
@@ -49,6 +50,13 @@ const productionConfig = {
       new OptimizeCSSAssetsPlugin({
         cssProcessorPluginOptions: {
           preset: ['default', { discardComments: { removeAll: true } }]
+        }
+      }),
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false
+          }
         }
       })
     ]
