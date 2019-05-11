@@ -1,7 +1,7 @@
 import './assets/styles/index.css';
 
 import moment, { Moment } from 'moment';
-import { h, render } from 'preact';
+import { Fragment, h, render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 
 const getTimezone = (date: Moment) => {
@@ -32,17 +32,29 @@ const App = () => {
   }, []);
 
   return (
-    <main>
-      <time dateTime={moment().toISOString()}>
-        {moment().format('dddd, MMMM D, YYYY')} {getTimezone(moment())}
-      </time>
-      {', '}
-      <span>Moscow</span>
-      <br />
-      <time dateTime={sunrise.machine}>{sunrise.human}</time>
-      <br />
-      <time dateTime={sunset.machine}>{sunset.human}</time>
-    </main>
+    <Fragment>
+      <header>
+        <time dateTime={moment().toISOString()}>
+          {moment().format('dddd, MMMM D, YYYY')} {getTimezone(moment())}
+        </time>
+        {', '}
+        <span>Moscow</span>
+      </header>
+      <main>
+        <article className="sun">
+          <time className="sun__time" dateTime={sunrise.machine}>
+            {sunrise.human}
+          </time>
+          <span className="sun__name">Sunrise</span>
+        </article>
+        <article className="sun">
+          <time className="sun__time" dateTime={sunset.machine}>
+            {sunset.human}
+          </time>
+          <span className="sun__name">Sunset</span>
+        </article>
+      </main>
+    </Fragment>
   );
 };
 
