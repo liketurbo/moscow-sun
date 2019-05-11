@@ -4,6 +4,8 @@ import moment, { Moment } from 'moment';
 import { Fragment, h, render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 
+import Countdown from './countdown';
+
 const getTimezone = (date: Moment) => {
   const match = date.format('Z').match(/(\+).([1-9])/)!;
 
@@ -41,18 +43,26 @@ const App = () => {
         <span>Moscow</span>
       </header>
       <main>
-        <article className="sun">
-          <time className="sun__time" dateTime={sunrise.machine}>
-            {sunrise.human}
-          </time>
-          <span className="sun__name">Sunrise</span>
-        </article>
-        <article className="sun">
-          <time className="sun__time" dateTime={sunset.machine}>
-            {sunset.human}
-          </time>
-          <span className="sun__name">Sunset</span>
-        </article>
+        {sunrise.machine ? (
+          <Countdown
+            sunriseTime={sunrise.machine}
+            sunsetTime={sunset.machine}
+          />
+        ) : null}
+        <section className="suns">
+          <article className="sun">
+            <time className="sun__time" dateTime={sunrise.machine}>
+              {sunrise.human}
+            </time>
+            <span className="sun__name">Sunrise</span>
+          </article>
+          <article className="sun">
+            <time className="sun__time" dateTime={sunset.machine}>
+              {sunset.human}
+            </time>
+            <span className="sun__name">Sunset</span>
+          </article>
+        </section>
       </main>
     </Fragment>
   );

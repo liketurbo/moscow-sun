@@ -12,6 +12,7 @@
     "deploy": "gh-pages -d ./dist"
   },
   "dependencies": {
+    "delay": "^4.2.0",
     "moment": "^2.24.0",
     "preact": "10.0.0-beta.1",
     "reset-css": "^4.0.1"

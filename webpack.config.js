@@ -86,9 +86,15 @@ const productionConfig = {
   plugins: [new CleanWebpackPlugin()]
 };
 
+const devServer = {
+  devServer: {
+    port: 3000
+  }
+};
+
 module.exports = (_, { mode }) => {
   if (mode === 'development') {
-    return commonConfig(DEV_ENV);
+    return merge(commonConfig(DEV_ENV), devServer);
   }
   return merge(commonConfig(PROD_ENV), productionConfig);
 };
