@@ -1,12 +1,13 @@
 const path = require('path');
+const merge = require('webpack-merge');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const merge = require('webpack-merge');
 const EmojiFaviconPlugin = require('emoji-favicon-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const DEV_ENV = 'DEV_ENV';
 const PROD_ENV = 'PROD_ENV';
@@ -83,7 +84,14 @@ const productionConfig = {
       })
     ]
   },
-  plugins: [new CleanWebpackPlugin()]
+  plugins: [
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, 'src', 'assets', 'seo')
+      }
+    ])
+  ]
 };
 
 const devServer = {
