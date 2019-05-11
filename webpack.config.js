@@ -26,7 +26,13 @@ const commonConfig = env => ({
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          env === DEV_ENV ? 'css-loader?sourceMap' : 'css-loader'
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: env === DEV_ENV
+            }
+          },
+          'csscomb-loader'
         ]
       }
     ]
