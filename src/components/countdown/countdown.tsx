@@ -6,18 +6,17 @@ import { FunctionalComponent, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 
 interface CountdownProps {
-  sunriseTime: string;
-  sunsetTime: string;
+  date: string;
 }
 
-const Countdown: FunctionalComponent<CountdownProps> = ({ sunsetTime }) => {
+const Countdown: FunctionalComponent<CountdownProps> = ({ date }) => {
   const [delayAmount, setDelayAmount] = useState(0);
 
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const end = moment(sunsetTime);
+  const end = moment(date);
 
   // @ts-ignore
   useEffect(async () => {

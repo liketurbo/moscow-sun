@@ -1,38 +1,17 @@
 import './app.sass';
 
-import moment from 'moment';
 import { Fragment, h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
 
+import useFetch from '../../utils/use-fetch';
 import Countdown from '../countdown/countdown';
 import Header from '../header/header';
 import Loading from '../loading/loading';
 import Sun from '../sun/sun';
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-
-  const [sunrise, setSunrise] = useState({ human: '', machine: '' });
-  const [sunset, setSunset] = useState({ human: '', machine: '' });
-
-  // @ts-ignore
-  useEffect(async () => {
-    const res = await fetch(
-      'https://api.sunrise-sunset.org/json?lat=55.7504461&lng=37.6174943&date=today&formatted=0'
-    );
-    const data = await res.json();
-
-    await setSunrise({
-      human: moment(data.results.sunrise).format('h:mm A'),
-      machine: data.results.sunrise
-    });
-    await setSunset({
-      human: moment(data.results.sunset).format('h:mm A'),
-      machine: data.results.sunset
-    });
-
-    setLoading(false);
-  }, []);
+  const { data, loading } = useFetch(
+    'https://api.sunrise-sunset.org/json?lat=55.7504461&lng=37.6174943&date=today&formatted=0'
+  );
 
   if (loading) {
     return (
@@ -49,10 +28,10 @@ const App = () => {
     <Fragment>
       <Header />
       <main>
-        <Countdown sunriseTime={sunrise.machine} sunsetTime={sunset.machine} />
+        <Countdown date={data.sunset} />
         <section className="suns">
-          <Sun time={sunrise} name="Sunrise" />
-          <Sun time={sunset} name="Sunset" />
+          <Sun time={data.sunrise} name="Sunrise" />
+          <Sun time={data.sunset} name="Sunset" />
         </section>
       </main>
     </Fragment>
