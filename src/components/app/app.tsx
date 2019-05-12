@@ -5,6 +5,7 @@ import { Fragment, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 
 import Countdown from '../countdown/countdown';
+import Sun from '../sun/sun';
 
 const getTimezone = (date: Moment) => {
   const match = date.format('Z').match(/(\+).([1-9])/)!;
@@ -50,18 +51,8 @@ const App = () => {
           />
         ) : null}
         <section className="suns">
-          <article className="sun">
-            <time className="sun__time" dateTime={sunrise.machine}>
-              {sunrise.human}
-            </time>
-            <span className="sun__name">Sunrise</span>
-          </article>
-          <article className="sun">
-            <time className="sun__time" dateTime={sunset.machine}>
-              {sunset.human}
-            </time>
-            <span className="sun__name">Sunset</span>
-          </article>
+          <Sun time={sunrise} name="Sunrise" />
+          <Sun time={sunset} name="Sunset" />
         </section>
       </main>
     </Fragment>
