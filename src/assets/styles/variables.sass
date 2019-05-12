@@ -1,11 +1,22 @@
 // Typography
-$fontFamily: Roboto, Arial, Helvetica, sans-serif
+$font_family: Roboto, Arial, Helvetica, sans-serif
 
 // Layout
-$spaceUnit: 16px
+@function space_unit($units)
+  @if $units > 1
+    @return ($units / 1.5) * 16px
+  @if $units < -1
+    @return (16px * 2) + ($units / 1.5) * 16px
+  @if $units == -1 or $units == 0 or $units == 1
+    @return 16px
+
+@function font_unit($units)
+  @if $units > 1
+    @return ($units / 1.5) * 16px
+  @if $units < -1
+    @return (16px * 2) + ($units / 1.5) * 16px
+  @if $units == -1 or $units == 0 or $units == 1
+    @return 16px
 
 // Colors
-$textColors: (
-  "primary":  rgba(0, 0, 0, 0.87)
-  "secondary":  rgba(0, 0, 0, 0.54)
-)
+$text_colors: ("primary": rgba(0,0,0,.87), "secondary": rgba(0,0,0,.54))

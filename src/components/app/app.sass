@@ -1,17 +1,17 @@
 @import '~reset-css/sass/_reset.scss'
 
 body
-  font-family: Arial, Helvetica, sans-serif
+  font-family: $font_family
 
 header 
-  margin-top: 16px
+  margin-top: space_unit(1)
 
   text-align: center
 
-  color: rgba(0, 0, 0, 0.54)
+  color: map-get($text_colors, "secondary")
 
-  font-size: 22px
-  line-height: 30px
+  font-size: font_unit(2)
+  line-height: space_unit(3)
 
 main 
   display: flex
@@ -26,25 +26,25 @@ main
 .sun 
   display: inline-block
 
-  margin: 16px
-  padding: 16px
+  margin: space_unit(1)
+  padding: space_unit(1)
 
   text-align: center
 
-  border: 1px solid #dfe1e5
+  border: 1px solid lighten(map-get($text_colors, "secondary"), 80%)
   border-radius: 2px
 
-  line-height: 30px
+  line-height: space_unit(3)
 
 .sun__time 
   display: block
 
-  color: rgba(0, 0, 0, 0.87)
+  color: map-get($text_colors, "primary")
 
-  font-size: 34px
+  font-size: font_unit(3)
 
 .sun__name 
-  color: rgba(0, 0, 0, 0.54)
+  color: map-get($text_colors, "secondary")
 
-  font-size: 18px
+  font-size: font_unit(1)
 

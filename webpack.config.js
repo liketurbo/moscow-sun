@@ -36,7 +36,14 @@ const commonConfig = env => ({
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: env === DEV_ENV
+              sourceMap: env === DEV_ENV,
+              data: `@import ${path.join(
+                __dirname,
+                'src',
+                'assets',
+                'styles',
+                'variables.sass'
+              )}`
             }
           }
         ]
