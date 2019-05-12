@@ -1,19 +1,17 @@
 import './app.sass';
 
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import { Fragment, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 
 import Countdown from '../countdown/countdown';
+import Header from '../header/header';
+import Loading from '../loading/loading';
 import Sun from '../sun/sun';
 
-const getTimezone = (date: Moment) => {
-  const match = date.format('Z').match(/(\+).([1-9])/)!;
-
-  return `(GMT${match[1]}${match[2]})`;
-};
-
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
   const [sunrise, setSunrise] = useState({ human: '', machine: '' });
   const [sunset, setSunset] = useState({ human: '', machine: '' });
 
@@ -24,32 +22,34 @@ const App = () => {
     );
     const data = await res.json();
 
-    setSunrise({
+    await setSunrise({
       human: moment(data.results.sunrise).format('h:mm A'),
       machine: data.results.sunrise
     });
-    setSunset({
+    await setSunset({
       human: moment(data.results.sunset).format('h:mm A'),
       machine: data.results.sunset
     });
+
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return (
+      <Fragment>
+        <Header />
+        <main>
+          <Loading />
+        </main>
+      </Fragment>
+    );
+  }
 
   return (
     <Fragment>
-      <header>
-        <time dateTime={moment().toISOString()}>
-          {moment().format('dddd, MMMM D, YYYY')} {getTimezone(moment())}
-        </time>
-        {', '}
-        <span>Moscow</span>
-      </header>
+      <Header />
       <main>
-        {sunrise.machine ? (
-          <Countdown
-            sunriseTime={sunrise.machine}
-            sunsetTime={sunset.machine}
-          />
-        ) : null}
+        <Countdown sunriseTime={sunrise.machine} sunsetTime={sunset.machine} />
         <section className="suns">
           <Sun time={sunrise} name="Sunrise" />
           <Sun time={sunset} name="Sunset" />
