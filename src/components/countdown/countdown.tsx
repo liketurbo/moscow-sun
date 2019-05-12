@@ -1,35 +1,28 @@
 import './countdown.sass';
 
-import delay from 'delay';
 import moment from 'moment';
 import { FunctionalComponent, h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 
 interface CountdownProps {
   date: string;
 }
 
 const Countdown: FunctionalComponent<CountdownProps> = ({ date }) => {
-  const [delayAmount, setDelayAmount] = useState(0);
-
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-
+  let now = new Date();
   const end = moment(date);
 
-  // @ts-ignore
-  useEffect(async () => {
-    await delay(delayAmount);
+  const [hours, setHours] = useState(end.diff(now, 'hours') % 24);
+  const [minutes, setMinutes] = useState(end.diff(now, 'minutes') % 60);
+  const [seconds, setSeconds] = useState(end.diff(now, 'seconds') % 60);
 
-    const now = moment();
+  setInterval(() => {
+    now = new Date();
 
     setHours(end.diff(now, 'hours') % 24);
     setMinutes(end.diff(now, 'minutes') % 60);
     setSeconds(end.diff(now, 'seconds') % 60);
-
-    if (delayAmount === 0) setDelayAmount(1000);
-  }, [seconds]);
+  });
 
   return (
     <section className="countdown">
