@@ -24,7 +24,7 @@ const commonConfig = env => ({
     rules: [
       { test: /\.tsx?$/, use: 'ts-loader' },
       {
-        test: /\.css$/,
+        test: /\.s[ac]ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -33,7 +33,12 @@ const commonConfig = env => ({
               sourceMap: env === DEV_ENV
             }
           },
-          'csscomb-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: env === DEV_ENV
+            }
+          }
         ]
       }
     ]

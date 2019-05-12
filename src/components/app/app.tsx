@@ -1,4 +1,4 @@
-import './app.css';
+import './app.sass';
 
 import moment, { Moment } from 'moment';
 import { Fragment, h } from 'preact';

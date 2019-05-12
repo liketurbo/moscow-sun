@@ -1,4 +1,4 @@
-import './countdown.css';
+import './countdown.sass';
 
 import delay from 'delay';
 import moment from 'moment';
