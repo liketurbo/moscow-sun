@@ -1,4 +1,4 @@
-import './assets/styles/countdown.css';
+import './countdown.css';
 
 import delay from 'delay';
 import moment from 'moment';
