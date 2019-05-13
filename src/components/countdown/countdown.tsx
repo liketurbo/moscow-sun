@@ -5,12 +5,12 @@ import { FunctionalComponent, h } from 'preact';
 import { useState } from 'preact/hooks';
 
 interface CountdownProps {
-  date: string;
+  time: string;
 }
 
-const Countdown: FunctionalComponent<CountdownProps> = ({ date }) => {
+const Countdown: FunctionalComponent<CountdownProps> = ({ time }) => {
   let now = new Date();
-  const end = moment(date);
+  const end = moment(time);
 
   const [hours, setHours] = useState(end.diff(now, 'hours') % 24);
   const [minutes, setMinutes] = useState(end.diff(now, 'minutes') % 60);
@@ -22,7 +22,7 @@ const Countdown: FunctionalComponent<CountdownProps> = ({ date }) => {
     setHours(end.diff(now, 'hours') % 24);
     setMinutes(end.diff(now, 'minutes') % 60);
     setSeconds(end.diff(now, 'seconds') % 60);
-  });
+  }, 1000);
 
   return (
     <section className="countdown">

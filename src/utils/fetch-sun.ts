@@ -1,4 +1,4 @@
-const getFetch = async (
+const fetchSun = async (
   url: string
 ): Promise<{ sunrise: string; sunset: string }> => {
   const resp = await fetch(url);
@@ -7,4 +7,4 @@ const getFetch = async (
   return data.results;
 };
 
-export default getFetch;
+export default fetchSun;

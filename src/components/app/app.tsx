@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Fragment, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 
-import getFetch from '../../utils/get-fetch';
+import fetchSun from '../../utils/fetch-sun';
 import getUrl from '../../utils/get-url';
 import Countdown from '../countdown/countdown';
 import Header from '../header/header';
@@ -21,10 +21,10 @@ const App = () => {
   //@ts-ignore
   useEffect(async () => {
     const now = moment();
-    let resp = await getFetch(getUrl(now));
+    let resp = await fetchSun(getUrl(now));
 
     if (moment().isAfter(resp.sunset)) {
-      resp = await getFetch(getUrl(now.add(1, 'day')));
+      resp = await fetchSun(getUrl(now.add(1, 'day')));
     }
 
     setCurrent({ sunrise: resp.sunrise, sunset: resp.sunset });
@@ -46,7 +46,7 @@ const App = () => {
     <Fragment>
       <Header />
       <main>
-        <Countdown date={current.sunset} />
+        <Countdown time={current.sunset} />
         <section className="suns">
           <Sun time={current.sunrise} name="Sunrise" />
           <Sun time={current.sunset} name="Sunset" />
