@@ -3,6 +3,7 @@ import './app.sass';
 import moment from 'moment';
 import { Fragment, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
+import { useSelector } from 'react-redux';
 
 import fetchSun from '../../utils/fetch-sun';
 import getUrl from '../../utils/get-url';
@@ -31,6 +32,8 @@ const App = () => {
     setLoading(false);
   }, []);
 
+  const seconds = useSelector((state: any) => state.seconds);
+
   if (loading) {
     return (
       <Fragment>
@@ -46,6 +49,7 @@ const App = () => {
     <Fragment>
       <Header />
       <main>
+        {seconds}
         <Countdown time={current.sunset} />
         <section className="suns">
           <Sun time={current.sunrise} name="Sunrise" />

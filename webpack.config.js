@@ -51,7 +51,11 @@ const commonConfig = env => ({
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      react: 'preact/compat',
+      'react-dom': 'preact/compat'
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
