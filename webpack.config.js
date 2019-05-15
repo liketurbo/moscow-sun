@@ -55,7 +55,8 @@ const commonConfig = env => ({
     alias: {
       react: 'preact/compat',
       'react-dom': 'preact/compat'
-    }
+    },
+    mainFiles: ['index']
   },
   plugins: [
     new HtmlWebpackPlugin({
