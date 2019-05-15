@@ -2,10 +2,12 @@ import moment from 'moment';
 import { call, put } from 'redux-saga/effects';
 
 import fetchSunAPI from '../../utils/fetch-sun-api';
-import { _SET_SUN } from '../actions';
+import { _SET_LOADING, _SET_SUN } from '../actions';
 
 function* setSun() {
   try {
+    yield put({ type: _SET_LOADING, payload: true });
+
     const todayData = yield call(() => fetchSunAPI('today'));
     const now = moment();
 
@@ -55,6 +57,8 @@ function* setSun() {
         }
       });
     }
+
+    yield put({ type: _SET_LOADING, payload: false });
   } catch (err) {}
 }
 

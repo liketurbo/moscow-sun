@@ -1,28 +1,17 @@
 import './countdown.sass';
 
-import moment from 'moment';
-import { FunctionalComponent, h } from 'preact';
-import { useState } from 'preact/hooks';
+import { duration } from 'moment';
+import { h } from 'preact';
+import { useSelector } from 'react-redux';
 
-interface CountdownProps {
-  time: string;
-}
+import { State } from '../../redux/reducer';
 
-const Countdown: FunctionalComponent<CountdownProps> = ({ time }) => {
-  let now = new Date();
-  const end = moment(time);
+const Countdown = () => {
+  const sunsetSeconds = useSelector((state: State) => state.remainSunset);
 
-  const [hours, setHours] = useState(end.diff(now, 'hours') % 24);
-  const [minutes, setMinutes] = useState(end.diff(now, 'minutes') % 60);
-  const [seconds, setSeconds] = useState(end.diff(now, 'seconds') % 60);
-
-  setInterval(() => {
-    now = new Date();
-
-    setHours(end.diff(now, 'hours') % 24);
-    setMinutes(end.diff(now, 'minutes') % 60);
-    setSeconds(end.diff(now, 'seconds') % 60);
-  }, 1000);
+  const hours = duration(sunsetSeconds, 'seconds').hours();
+  const minutes = duration(sunsetSeconds, 'seconds').minutes();
+  const seconds = duration(sunsetSeconds, 'seconds').seconds();
 
   return (
     <section className="countdown">

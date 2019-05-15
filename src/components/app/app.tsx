@@ -4,22 +4,23 @@ import { Fragment, h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { SET_SUN } from '../../redux/actions';
+import { DECR_SUN, SET_SUN } from '../../redux/actions';
 import { State } from '../../redux/reducer';
+import useInterval from '../../utils/use-interval';
 import Countdown from '../countdown/countdown';
 import Header from '../header/header';
 import Loading from '../loading/loading';
 import Sun from '../sun/sun';
 
 const App = () => {
+  const dispatch = useDispatch();
+
   const loading = useSelector((state: State) => state.loading);
   const sunrise = useSelector((state: State) => state.sunrise);
   const sunset = useSelector((state: State) => state.sunset);
 
-  useEffect(() => {
-    const dispatch = useDispatch();
-    dispatch({ type: SET_SUN });
-  }, []);
+  useEffect(() => dispatch({ type: SET_SUN }), []);
+  useInterval(() => dispatch({ type: DECR_SUN }), loading ? null : 1000);
 
   if (loading) {
     return (
@@ -36,7 +37,7 @@ const App = () => {
     <Fragment>
       <Header />
       <main>
-        <Countdown time={sunset} />
+        <Countdown />
         <section className="suns">
           <Sun time={sunrise} name="Sunrise" />
           <Sun time={sunset} name="Sunset" />
